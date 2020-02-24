@@ -26,7 +26,7 @@
         <div class = "row">
             <div class = "col-md-8">
                 <h1>Featured Mars Image: {{ go2mars.image_name }}</h1>
-                <img src="{{ go2mars.image_url }}" alt="Mars featured image">
+                <img src="{{ go2mars.image_url }}" alt="Mars featured image", height="500">
                 <small>{{go2mars.image_desc}}</small>
             </div>
             <div class = "col-md-4">
@@ -44,23 +44,28 @@
             </div>
             <div class = "col-md-6">
                 <h1>Some Mars Facts:</h1>
-                <table class="centered thick-border">
-                    {% for k, v in go2mars.facts.items %}
+                <!-- <table class="centered thick-border">
+                    {% for x in go2mars.facts %}
                         <tr>
-                            <td>{{ k }}</td>
-                            <td>{{ v }}</td>
+                            <td>{{ x }}</td>
+                            <td>{{ y }}</td>
                         </tr>
                     {% endfor %}
-                </table>
-                <!-- <small>{{go2mars.facts}}</small> -->
+                </table>-->
+                <strong>{% autoescape off %}
+                    {{go2mars.facts}}
+                    {% endautoescape %}
+                    <!--https://stackoverflow.com/questions/3206344/passing-html-to-template-using-flask-jinja2-->
+                </strong>
             </div>
 
         </div>
 
         <div class = "row">
             <div class = "col-md-12">
-                {% for key, value in go2mars.hemispheres.items %}
-                {{ key }} : {{ value }}
+                {% for hemispheres in go2mars.hemispheres %}
+                    <h1>{{ hemispheres.title }} <br/>
+                    <img src="{{ hemispheres.img_url }}" alt="Hemisphere", height="500"> </h1>
                 {% endfor %}
             </div>
 

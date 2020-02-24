@@ -63,7 +63,7 @@ def scrape():
     fimage_desc = fancybox['data-description']
     fimage_purl = fancybox['data-fancybox-href']
 
-    fimage_url = f"jpl.nasa.gov{fimage_purl}"
+    fimage_url = f"https://www.jpl.nasa.gov{fimage_purl}"
 
     browser.quit()
 
@@ -125,7 +125,9 @@ def scrape():
     facts = pd.read_html(url_facts)
     facts = facts[0]
 
-    print(facts)
+    facts.columns = ['Datum', 'Value']
+
+    facts = facts.set_index('Datum')
 
     facts_html = facts.to_html()
 
@@ -161,13 +163,13 @@ def scrape():
         spot = soup.find('div', class_='container')
         image = spot.find('img', class_='wide-image')
         url = image['src']
-        url = f"astrogeology.usgs.gov{url}"
+        url = f"https://astrogeology.usgs.gov{url}"
         print(url)
         
-    #     key1 = "title"
-    #     key2 = "img_url"
+        key1 = "title"
+        key2 = "img_url"
         
-        temp_dict.update({title : url})
+        temp_dict.update({key1: title, key2: url})
         
         hemisphere_urls.append(temp_dict)
         
@@ -206,7 +208,7 @@ def scrape():
     go2mars["image_url"] = fimage_url
     go2mars["weather"] = weather
     go2mars["ismarscolder"] = ismarscolder
-    go2mars["facts"] = facts
+    go2mars["facts"] = facts_html
     go2mars["hemispheres"] = hemisphere_urls
 
     return go2mars
