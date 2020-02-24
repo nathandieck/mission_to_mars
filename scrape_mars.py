@@ -75,6 +75,7 @@ def scrape():
         #(it happens.)
 
     driver = webdriver.Chrome()  #https://stackoverflow.com/questions/59222947/retrieving-text-from-twitter-account-using-beautifulsoup-and-splinter
+    driver.get(url_weather)
 
     time.sleep(15)
 
@@ -163,17 +164,16 @@ def scrape():
         url = f"astrogeology.usgs.gov{url}"
         print(url)
         
-        key1 = "title"
-        key2 = "img_url"
+    #     key1 = "title"
+    #     key2 = "img_url"
         
-        temp_dict.update({key1: title, key2: url})
+        temp_dict.update({title : url})
         
         hemisphere_urls.append(temp_dict)
         
         browser.back()
         
     browser.quit()
-
     print(hemisphere_urls)
 
     """
@@ -196,3 +196,18 @@ def scrape():
     Hemispheres URL Dictionary: hemisphere_urls
 
     """
+
+    go2mars = {}
+
+    go2mars["headline"] = news_headline
+    go2mars["byline"] = news_byline
+    go2mars["image_name"] = fimage_name
+    go2mars["image_desc"] = fimage_desc
+    go2mars["image_url"] = fimage_url
+    go2mars["weather"] = weather
+    go2mars["ismarscolder"] = ismarscolder
+    go2mars["facts"] = facts
+    go2mars["hemispheres"] = hemisphere_urls
+
+    return go2mars
+

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    
+<head>
+    <meta charset = "UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>So you want to go to Mars...</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type = "text/css" href="style.css">
+</head>
+
+<style>
+
+</style>
+
+<body>
+
+    <div class = "container">
+
+        <div class="jumbotron text-center">
+            <h1>Plan Your Trip to the Red Planet</h1>
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Go to Mars!</a></p>
+        </div>
+
+        <div class = "row">
+            <div class = "col-md-8">
+                <h1>Featured Mars Image: {{ go2mars.image_name }}</h1>
+                <img src="{{ go2mars.image_url }}" alt="Mars featured image">
+                <small>{{go2mars.image_desc}}</small>
+            </div>
+            <div class = "col-md-4">
+                <h1>In Mars news today:</h1>
+                <h2>{{ go2mars.headline }}</h2>
+                <h4>{{ go2mars.byline }}</h4>
+            </div>
+        </div>
+
+        <div class = "row">
+            <div class = "col-md-6">
+                <h1>The weather report from Mars:</h1>
+                <h3>{{go2mars.weather}}</h3>
+                <small>Mars is colder than Chicago today? {{go2mars.ismarscolder}}</small>
+            </div>
+            <div class = "col-md-6">
+                <h1>Some Mars Facts:</h1>
+                <table class="centered thick-border">
+                    {% for k, v in go2mars.facts.items %}
+                        <tr>
+                            <td>{{ k }}</td>
+                            <td>{{ v }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <!-- <small>{{go2mars.facts}}</small> -->
+            </div>
+
+        </div>
+
+        <div class = "row">
+            <div class = "col-md-12">
+                {% for key, value in go2mars.hemispheres.items %}
+                {{ key }} : {{ value }}
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
